@@ -22,11 +22,67 @@ public class Player : MonoBehaviour {
         InputDirector();
         GravityDirector();
 
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, 0);
     }
 
     void InputDirector()
     {
+        //Einstellung der Gravitation
+        if(Input.GetAxis("GHorizontalXB") < 0 | Input.GetAxisRaw("GHorizontal") < 0)
+        {
+            Debug.Log("GHorizontal kleiner als 0");
+            gDirection = 4;
+        }
 
+        if(Input.GetAxis("GHorizontalXB") > 0 | Input.GetAxisRaw("GHorizontal") > 0)
+        {
+            Debug.Log("GHorizontal größer als 0");
+            gDirection = 2;
+        }
+
+        if(Input.GetAxis("GVerticalXB") < 0 | Input.GetAxisRaw("GVertical") < 0)
+        {
+            gDirection = 1;
+        }
+
+        if(Input.GetAxis("GVerticalXB") > 0 | Input.GetAxisRaw("GVertical") > 0)
+        {
+            gDirection = 3;
+        }
+
+        //Wenn man an der Wand klebt darf man sich nach oben und unten bewegen
+        if(gDirection == 2 | gDirection == 4)
+        {
+            if(Input.GetAxis("VerticalXB") < 0 | Input.GetAxisRaw("Vertical") < 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * 0.5f);
+            } else
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * 0);
+            }
+
+            if (Input.GetAxis("VerticalXB") > 0 | Input.GetAxisRaw("Vertical") > 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * -0.5f);
+
+            }
+        }
+
+        //Ansonsten nach links und rechts auf dem boden
+        if(gDirection == 1 | gDirection == 3)
+        {
+            if (Input.GetAxis("HorizontalXB") < 0 | Input.GetAxisRaw("Horizontal") < 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * -0.5f);
+            }
+
+            if (Input.GetAxis("HorizontalXB") > 0 | Input.GetAxisRaw("Horizontal") > 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * 0.5f);
+
+            }
+
+        }
     }
 
     void GravityDirector()
@@ -37,17 +93,27 @@ public class Player : MonoBehaviour {
                 Physics2D.gravity = new Vector2(0, 13f);
                 break;
             case 2:
-                Physics2D.gravity = new Vector2(-13f, 0);
+                Physics2D.gravity = new Vector2(13f, 0);
                 break;
             case 3:
                 Physics2D.gravity = new Vector2(0, -13f);
                 break;
             case 4:
-                Physics2D.gravity = new Vector2(13f, 0);
+                Physics2D.gravity = new Vector2(-13f, 0);
                 break;
         }
 
     }
 
+    //Wird verwendet für Room transisitions und checkpoint managment
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+    }
 
+    //Setzt die Position des checkpointes
+    void SetCheckpoint()
+    {
+
+    }
 }
