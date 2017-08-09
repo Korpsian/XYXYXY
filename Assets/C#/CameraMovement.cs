@@ -46,12 +46,13 @@ public class CameraMovement : MonoBehaviour {
 
             if (transform.position.y < newPos.y)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.01f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y + 0.01f), transform.position.z);
+
                 Debug.Log(transform.position.y);
             }
             else if (transform.position.y > newPos.y)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.01f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y - 0.01f), transform.position.z);
                 Debug.Log(transform.position.y);
             }
             yield return new WaitForSeconds(0.0001f);
@@ -62,17 +63,26 @@ public class CameraMovement : MonoBehaviour {
         {
             if (transform.position.x < newPos.x)
             {
-                transform.position = new Vector3(transform.position.x + 0.01f, transform.position.y, transform.position.z);
+                transform.position = new Vector3(CutMirDenShit(transform.position.x + 0.01f), transform.position.y, transform.position.z);
+
                 Debug.Log(transform.position.x);
             }
             else if (transform.position.y > newPos.y)
             {
-                transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y, transform.position.z);
+                transform.position = new Vector3(CutMirDenShit(transform.position.x - 0.01f), transform.position.y, transform.position.z);
                 Debug.Log(transform.position.x);
             }
             yield return new WaitForSeconds(0.0001f);
         }
 
         Debug.Log("Fertig mit bewegen");
+    }
+
+    float CutMirDenShit(float derShit)
+    {
+        string stringShit = derShit.ToString("#.00");
+        float neuerShit = float.Parse(stringShit);
+
+        return neuerShit;
     }
 }
