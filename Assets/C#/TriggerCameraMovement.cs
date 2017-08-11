@@ -13,12 +13,20 @@ public class TriggerCameraMovement : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+
         if(collision.tag == "Player")
         {
-            if(direction != 0)
+            if (Player.GetComponent<Player>().wasDead)
             {
-                Debug.Log("Camera Movement entdeckt!");
-                cam.GetComponent<CameraMovement>().MoveCamera(direction);
+                Player.GetComponent<Player>().wasDead = false;
+            } else
+            {
+                if (direction != 0)
+                {
+                    cam.GetComponent<CameraMovement>().MoveCamera(direction);
+                }
+
             }
         }
     }

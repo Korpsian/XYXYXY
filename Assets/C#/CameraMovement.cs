@@ -9,6 +9,7 @@ public class CameraMovement : MonoBehaviour {
     // 4 LEFT    2 RIGHT
     //      3 DOWN
 
+        //Bewegung ist gerade im gange
     bool activeMoving = false;
 
     public void MoveCamera(int direction)
@@ -49,12 +50,13 @@ public class CameraMovement : MonoBehaviour {
 
     IEnumerator SlowCameraMovement(Vector3 newPos)
     {
-        Debug.Log("in IEnumerator");
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+
+        Player.GetComponent<Player>().ableToMove = false;
 
         //Während die Y Positionen nicht gleich sind, wiederholen diesen Step bis sie sind
         while (transform.position.y != newPos.y)
         {
-            Debug.Log("Start Moving");
 
             if (transform.position.y < newPos.y)
             {
@@ -65,7 +67,6 @@ public class CameraMovement : MonoBehaviour {
             else if (transform.position.y > newPos.y)
             {
                 transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y - 0.01f), transform.position.z);
-                Debug.Log(transform.position.y);
             }
             yield return new WaitForSeconds(0.0001f);
         }
@@ -87,7 +88,8 @@ public class CameraMovement : MonoBehaviour {
             yield return new WaitForSeconds(0.0001f);
         }
         Time.timeScale = 1;
-        Debug.Log("Fertig mit bewegen");
+
+        Player.GetComponent<Player>().ableToMove = true;
         yield return new WaitForSeconds(0.5f);
         activeMoving = false;
     }

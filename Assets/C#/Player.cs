@@ -9,19 +9,27 @@ public class Player : MonoBehaviour {
     //      3 DOWN
     //Ändert die Gravitation nach der dementsprechenden Nummer
     public int gDirection = 3;
+
+    public bool ableToMove = true;
+    public bool wasDead = true;
+
+    int spawnGDirection;
     Vector3 SpawnPoint;
     
 
 	// Use this for initialization
 	void Start () {
         SpawnPoint = transform.position;
-        
+        spawnGDirection = gDirection;
     }
 	
 	// Update is called once per frame
 	void Update () {
         //Nimmt den Input und 
-        InputDirector();
+        if (ableToMove)
+        {
+            InputDirector();
+        }
         GravityDirector();
 
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, 0);
@@ -92,16 +100,16 @@ public class Player : MonoBehaviour {
         switch (gDirection)
         {
             case 1:
-                Physics2D.gravity = new Vector2(0, 13f);
+                Physics2D.gravity = new Vector2(0, 15f);
                 break;
             case 2:
-                Physics2D.gravity = new Vector2(13f, 0);
+                Physics2D.gravity = new Vector2(15f, 0);
                 break;
             case 3:
-                Physics2D.gravity = new Vector2(0, -13f);
+                Physics2D.gravity = new Vector2(0, -15f);
                 break;
             case 4:
-                Physics2D.gravity = new Vector2(-13f, 0);
+                Physics2D.gravity = new Vector2(-15f, 0);
                 break;
         }
 
@@ -113,9 +121,11 @@ public class Player : MonoBehaviour {
         if (collision.tag == "Triggerzone")
         {
             SpawnPoint = new Vector3(transform.position.x, transform.position.y);
+            spawnGDirection = gDirection;
         }
-        if (collision.tag == "badguy")
+        if (collision.tag == "Badguy")
         {
+            Debug.Log("BAAAADDDD");
             death();
         }
     }
@@ -123,6 +133,8 @@ public class Player : MonoBehaviour {
     //Setzt die Position des checkpointes
     private void death() 
     {
+        gDirection = spawnGDirection;
+        wasDead = true;
         Instantiate(gameObject, SpawnPoint, Quaternion.identity);
         Destroy(gameObject);
     }
