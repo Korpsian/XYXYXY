@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
     //      3 DOWN
     //Ändert die Gravitation nach der dementsprechenden Nummer
     public int gDirection = 3;
+    public Transform SpawnPoint;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -108,12 +110,20 @@ public class Player : MonoBehaviour {
     //Wird verwendet für Room transisitions und checkpoint managment
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.tag == "Triggerzone")
+        {
+            SpawnPoint.position = new Vector2(transform.position.x, transform.position.y);
+        }
+        if (collision.tag == "badguy")
+        {
+            death();
+        }
     }
 
     //Setzt die Position des checkpointes
-    void SetCheckpoint()
+    private void death() 
     {
-
+        Instantiate(gameObject, SpawnPoint);
+        Destroy(gameObject);
     }
 }
