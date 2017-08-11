@@ -9,12 +9,12 @@ public class Player : MonoBehaviour {
     //      3 DOWN
     //Ändert die Gravitation nach der dementsprechenden Nummer
     public int gDirection = 3;
-    public Transform SpawnPoint;
+    Vector3 SpawnPoint;
     
 
 	// Use this for initialization
 	void Start () {
-        
+        SpawnPoint = transform.position;
         
     }
 	
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour {
     {
         if (collision.tag == "Triggerzone")
         {
-            SpawnPoint.position = new Vector2(transform.position.x, transform.position.y);
+            SpawnPoint = new Vector3(transform.position.x, transform.position.y);
         }
         if (collision.tag == "badguy")
         {
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
     //Setzt die Position des checkpointes
     private void death() 
     {
-        Instantiate(gameObject, SpawnPoint);
+        Instantiate(gameObject, SpawnPoint, Quaternion.identity);
         Destroy(gameObject);
     }
 }

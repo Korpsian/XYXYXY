@@ -60,7 +60,7 @@ public class CameraMovement : MonoBehaviour {
             {
                 transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y + 0.01f), transform.position.z);
 
-                Debug.Log(transform.position.y);
+
             }
             else if (transform.position.y > newPos.y)
             {
