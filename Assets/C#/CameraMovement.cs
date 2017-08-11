@@ -9,11 +9,20 @@ public class CameraMovement : MonoBehaviour {
     // 4 LEFT    2 RIGHT
     //      3 DOWN
 
+    bool activeMoving = false;
+
     public void MoveCamera(int direction)
     {
         Vector3 newPos = transform.position;
 
-        switch (direction)
+        //Wenn keine Aktive bewegung vorhanden ist, führe eine bewegung aus
+        if (!activeMoving)
+        {
+            activeMoving = true;
+            //Stoppe die Zeit
+            Time.timeScale = 0.1f;
+
+            switch (direction)
         {
 
             case 1:
@@ -33,13 +42,16 @@ public class CameraMovement : MonoBehaviour {
                 StartCoroutine(SlowCameraMovement(newPos));
                 break;
         }
+
+        }
+
     }
 
     IEnumerator SlowCameraMovement(Vector3 newPos)
     {
         Debug.Log("in IEnumerator");
 
-        //Während die X Positionen nicht gleich sind, wiederholen diesen Step bis sie sind
+        //Während die Y Positionen nicht gleich sind, wiederholen diesen Step bis sie sind
         while (transform.position.y != newPos.y)
         {
             Debug.Log("Start Moving");
@@ -67,15 +79,17 @@ public class CameraMovement : MonoBehaviour {
 
                 Debug.Log(transform.position.x);
             }
-            else if (transform.position.y > newPos.y)
+            else if (transform.position.x > newPos.x)
             {
                 transform.position = new Vector3(CutMirDenShit(transform.position.x - 0.01f), transform.position.y, transform.position.z);
                 Debug.Log(transform.position.x);
             }
             yield return new WaitForSeconds(0.0001f);
         }
-
+        Time.timeScale = 1;
         Debug.Log("Fertig mit bewegen");
+        yield return new WaitForSeconds(0.5f);
+        activeMoving = false;
     }
 
     float CutMirDenShit(float derShit)
