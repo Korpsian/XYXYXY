@@ -6,31 +6,22 @@ public class particleEffect : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("Start particleEffect");
+
+        float rng1 = Random.Range(-5f, 5f);
+        float rng2 = Random.Range(-5f, 5f);
+
+        gameObject.GetComponent<Rigidbody2D>().AddForce(transform.right * rng1);
+        gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * rng2);
+
         StartCoroutine(DestroyOverTime());
 	}
 
 
     IEnumerator DestroyOverTime()
     {
-        Debug.Log("In Enumerator");
-
-        while(gameObject.GetComponent<SpriteRenderer>().color.a > 0)
-        {
-            Debug.Log("in While schleife");
-            var color = gameObject.GetComponent<SpriteRenderer>().color;
-            Color tmp = color;
-            tmp.a = tmp.a - 5f;
-            color = tmp;
-            yield return new WaitForSeconds(0.2f);
-            
-        }
-
-        yield return new WaitForSeconds(1f);
+        float time = Random.Range(1, 3);
+        yield return new WaitForSeconds(time);
+        Destroy(gameObject);
     }
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

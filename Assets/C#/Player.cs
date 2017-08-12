@@ -12,7 +12,8 @@ public class Player : MonoBehaviour {
 
     public bool ableToMove = true;
     public bool wasDead = true;
-    int deathCount = 0;
+    public int deathCount = 0;
+    public GameObject deathParticle;
 
     int spawnGDirection;
     Vector3 SpawnPoint;
@@ -157,7 +158,12 @@ public class Player : MonoBehaviour {
                 p.name = "Player";
             }
         }
-        Debug.Log(deathCount);
+
+        int particleCount = Random.Range(5, 15);
+        for(int i = particleCount; i > 0; i--)
+        {
+            Instantiate(deathParticle, transform.position, Quaternion.identity);
+        }
 
         Destroy(gameObject);
     }
