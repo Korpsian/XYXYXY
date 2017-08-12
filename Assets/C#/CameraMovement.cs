@@ -78,12 +78,10 @@ public class CameraMovement : MonoBehaviour {
             {
                 transform.position = new Vector3(CutMirDenShit(transform.position.x + 0.01f), transform.position.y, transform.position.z);
 
-                Debug.Log(transform.position.x);
             }
             else if (transform.position.x > newPos.x)
             {
                 transform.position = new Vector3(CutMirDenShit(transform.position.x - 0.01f), transform.position.y, transform.position.z);
-                Debug.Log(transform.position.x);
             }
             yield return new WaitForSeconds(0.0001f);
         }

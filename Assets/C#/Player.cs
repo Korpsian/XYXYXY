@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 
     public bool ableToMove = true;
     public bool wasDead = true;
+    int deathCount = 0;
 
     int spawnGDirection;
     Vector3 SpawnPoint;
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Nimmt den Input und 
+        //Ist der Player erlaubt sich zu bewegen? 
         if (ableToMove)
         {
             InputDirector();
@@ -40,13 +41,11 @@ public class Player : MonoBehaviour {
         //Einstellung der Gravitation
         if(Input.GetAxis("GHorizontalXB") < 0 | Input.GetAxisRaw("GHorizontal") < 0)
         {
-            Debug.Log("GHorizontal kleiner als 0");
             gDirection = 4;
         }
 
         if(Input.GetAxis("GHorizontalXB") > 0 | Input.GetAxisRaw("GHorizontal") > 0)
         {
-            Debug.Log("GHorizontal größer als 0");
             gDirection = 2;
         }
 
@@ -76,6 +75,13 @@ public class Player : MonoBehaviour {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * -0.5f);
 
             }
+
+            var v = gameObject.GetComponent<Rigidbody2D>().velocity;
+
+            if(Input.GetAxis("VerticalXB") == 0 | Input.GetAxisRaw("Vertical") == 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+            }
         }
 
         //Ansonsten nach links und rechts auf dem boden
@@ -92,6 +98,12 @@ public class Player : MonoBehaviour {
 
             }
 
+            if (Input.GetAxis("HorizontalXB") == 0 | Input.GetAxisRaw("Horizontal") == 0)
+            {
+                gameObject.GetComponent<Rigidbody2D>().angularVelocity = 0;
+            }
+
+
         }
     }
 
@@ -100,16 +112,16 @@ public class Player : MonoBehaviour {
         switch (gDirection)
         {
             case 1:
-                Physics2D.gravity = new Vector2(0, 15f);
+                Physics2D.gravity = new Vector2(0, 20f);
                 break;
             case 2:
-                Physics2D.gravity = new Vector2(15f, 0);
+                Physics2D.gravity = new Vector2(20f, 0);
                 break;
             case 3:
-                Physics2D.gravity = new Vector2(0, -15f);
+                Physics2D.gravity = new Vector2(0, -20f);
                 break;
             case 4:
-                Physics2D.gravity = new Vector2(-15f, 0);
+                Physics2D.gravity = new Vector2(-20f, 0);
                 break;
         }
 
@@ -125,7 +137,6 @@ public class Player : MonoBehaviour {
         }
         if (collision.tag == "Badguy")
         {
-            Debug.Log("BAAAADDDD");
             death();
         }
     }
@@ -136,6 +147,18 @@ public class Player : MonoBehaviour {
         gDirection = spawnGDirection;
         wasDead = true;
         Instantiate(gameObject, SpawnPoint, Quaternion.identity);
+
+        GameObject [] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject p in players)
+        {
+            if (p.name.Contains("(Clone)"))
+            {
+                p.GetComponent<Player>().deathCount++;
+                p.name = "Player";
+            }
+        }
+        Debug.Log(deathCount);
+
         Destroy(gameObject);
     }
 }
