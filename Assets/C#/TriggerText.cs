@@ -25,7 +25,11 @@ public class TriggerText : MonoBehaviour {
             {
                 foreach (GameObject t in Text)
                 {
-                    StartCoroutine(CanvasGroupAlpha(t));
+                    if(t != null)
+                    {
+                        StartCoroutine(CanvasGroupAlpha(t));
+                    }
+
                 }
             }
         }
@@ -35,19 +39,22 @@ public class TriggerText : MonoBehaviour {
     {
         foreach(GameObject t in Text)
         {
-            StartCoroutine(CanvasGroupAlpha(t));
-            yield return new WaitForSeconds(timeBetween);
+            if(t != null)
+            {
+                StartCoroutine(CanvasGroupAlpha(t));
+                yield return new WaitForSeconds(timeBetween);
+            }
         }
 
     }
 
     IEnumerator CanvasGroupAlpha(GameObject t)
     {
-        var alpha = t.GetComponent<CanvasGroup>().alpha;
+        var alpha = t.GetComponent<CanvasGroup>();
 
-        while(alpha < 1)
+        while(alpha.alpha < 1)
         {
-            alpha = alpha + 0.1f;
+            alpha.alpha = alpha.alpha + 0.1f;
             yield return new WaitForSeconds(alphaSpeed);
         }
     }
