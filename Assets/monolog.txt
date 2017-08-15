@@ -31,4 +31,69 @@ See!
 well.... you died...
 	isn't it a great feature??
 			(i know its soooo cool, wow!)
-		
+					...try to use the arrow keys maybe? 
+							I don't know if this feature was implemented...
+
+[Neuer Raum/Abschnitt, hindernisskurs mit stacheln]
+	[Bei jeden stacheln, schreibe nachdem spieler überwunden hat ("watch out for these etc. etc.")]
+
+[Neuer Raum, Einbringung von Öffnen von Links]
+	Mabye you ask yourself "... where is the music?"
+			well... don't hassle! 
+					We have chosen only the best artists!
+							...like... 
+									...ummm....
+										...britney spears...?
+
+[Neuer Raum, button für link]		
+	...well... i actully don't know what artists we have...
+				i was not in the meeting ok?
+				-break-
+						...just push this button...
+							[Spieler drückt button]
+									öffne youtube link: https://www.youtube.com/watch?v=xzILUpaTtbc&t=1820s 
+
+[Nächster raum, öffne meme]
+	...well... that's depressing...
+	-break-
+			...try this...
+					öffne link: https://www.youtube.com/watch?v=Z8yW5cyXXRc
+						...what?
+
+					
+[Nächster raum mit antwort]
+			i just google "cat" and "toast" and copied the first thing.... 
+					i just wanted to make you feel better.. now it's just waird
+					-break-
+								...just listen to the music...
+
+[Erklöhrung des Namens]
+	...You know... there is this cool game... 
+			it's really good! 
+				i swear!
+					-break-
+						It's called "VVVV" I think?
+							...wait... how many "V" was that...
+								-break-
+									...let me google this quickly...
+									 öffne link: https://www.google.de/search?q=how+many+V%27s+has+vvvvv&oq=how+many+V%27s+has+vvvvv&gs_l=psy-ab.3...10236.10471.0.12702.2.2.0.0.0.0.64.124.2.2.0....0...1.1.64.psy-ab..0.0.0.XD5I9Jusd5I
+								-break-
+									anywaaayyysss the name came from this game because of the gameplay idea
+										but the twist was the you can go in the X and also Y axis
+											...but then the the 2 weeks went by pritty fast...
+									 
+
+[Endraum mit Credits]
+	well... that was the game
+			if you want to call it like that...
+				...that's  it.... 
+
+the following lazy guys worked on the project:
+- Korbinian Maag -
+		did something (did all the work)
+
+- Kevin Horcher - got an award (for beeing there)
+		aka wrote 2 lines of code
+
+- Sascha Schütz - spell checking 
+		(wanted to be there... but wasn't)

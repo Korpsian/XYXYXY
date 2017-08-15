@@ -53,6 +53,7 @@ public class CameraMovement : MonoBehaviour {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
 
         Player.GetComponent<Player>().ableToMove = false;
+        Player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
         //Während die Y Positionen nicht gleich sind, wiederholen diesen Step bis sie sind
         while (transform.position.y != newPos.y)
