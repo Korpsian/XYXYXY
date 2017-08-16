@@ -55,34 +55,62 @@ public class CameraMovement : MonoBehaviour {
         Player.GetComponent<Player>().ableToMove = false;
         Player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 
+
+        int yy = 0;
         //Während die Y Positionen nicht gleich sind, wiederholen diesen Step bis sie sind
         while (transform.position.y != newPos.y)
         {
 
             if (transform.position.y < newPos.y)
             {
-                transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y + 0.01f), transform.position.z);
-
-
+                if(yy == 2)
+                {
+                    break;
+                } else
+                {
+                    yy = 1;
+                    transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y + 0.01f), transform.position.z);
+                }
             }
             else if (transform.position.y > newPos.y)
             {
-                transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y - 0.01f), transform.position.z);
+                if(yy == 1)
+                {
+                    break;
+                } else
+                {
+                    yy = 2;
+                    transform.position = new Vector3(transform.position.x, CutMirDenShit(transform.position.y - 0.01f), transform.position.z);
+                }
             }
             yield return new WaitForSeconds(0.0001f);
         }
 
+        int xx = 0;
         //Während die X Positionen nicht gleich sind, wiederholen diesen Step bis sie sind
         while (transform.position.x != newPos.x)
         {
             if (transform.position.x < newPos.x)
             {
-                transform.position = new Vector3(CutMirDenShit(transform.position.x + 0.01f), transform.position.y, transform.position.z);
-
+                if(xx == 2)
+                {
+                    break;
+                } else
+                {
+                    xx = 1;
+                    transform.position = new Vector3(CutMirDenShit(transform.position.x + 0.01f), transform.position.y, transform.position.z);
+                }
             }
             else if (transform.position.x > newPos.x)
             {
-                transform.position = new Vector3(CutMirDenShit(transform.position.x - 0.01f), transform.position.y, transform.position.z);
+                if(xx == 1)
+                {
+                    break;
+                } else
+                {
+                    xx = 2;
+                    transform.position = new Vector3(CutMirDenShit(transform.position.x - 0.01f), transform.position.y, transform.position.z);
+                }
             }
             yield return new WaitForSeconds(0.0001f);
         }
